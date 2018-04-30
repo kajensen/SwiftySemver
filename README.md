@@ -4,8 +4,17 @@ Compare two semantic version strings in Swift. https://semver.org/
 # Usage
 
 ```
-guard let bundleSemVer = Semver(versionString: Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String), 
-let minSemVer = Semver(versionString: "2.1.0") else { return }
+let bundleVersionString = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String
+let minVersionString = "2.1.0"
 
-print(bundleSemVer >= minSemVer)
+guard
+  let bundleSemVer = Semver(versionString: bundleVersionString), 
+  let minSemVer = Semver(versionString: minVersionString)
+else { return }
+
+if bundleSemVer >= minSemVer {
+  // great!
+} else {
+  // prompt user to download new version
+}
 ```
